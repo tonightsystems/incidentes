@@ -9,13 +9,6 @@ App::uses('AppModel', 'Model');
 class Incident extends AppModel {
 
 /**
- * Display field
- *
- * @var string
- */
-	public $displayField = 'title';
-
-/**
  * Validation rules
  *
  * @var array
@@ -52,8 +45,8 @@ class Incident extends AppModel {
 			),
 		),
 		'closed' => array(
-			'boolean' => array(
-				'rule' => array('boolean'),
+			'numeric' => array(
+				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,

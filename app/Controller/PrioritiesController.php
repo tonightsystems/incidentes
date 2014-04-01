@@ -5,7 +5,6 @@ App::uses('AppController', 'Controller');
  *
  * @property Priority $Priority
  * @property PaginatorComponent $Paginator
- * @property SessionComponent $Session
  */
 class PrioritiesController extends AppController {
 
@@ -14,7 +13,7 @@ class PrioritiesController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator', 'Session');
+	public $components = array('Paginator');
 
 /**
  * index method

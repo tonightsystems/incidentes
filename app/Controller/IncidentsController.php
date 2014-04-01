@@ -5,7 +5,6 @@ App::uses('AppController', 'Controller');
  *
  * @property Incident $Incident
  * @property PaginatorComponent $Paginator
- * @property SessionComponent $Session
  */
 class IncidentsController extends AppController {
 
@@ -14,7 +13,7 @@ class IncidentsController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator', 'Session');
+	public $components = array('Paginator');
 
 /**
  * index method
