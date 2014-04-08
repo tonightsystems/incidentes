@@ -6,7 +6,7 @@
 			<th><?php echo $this->Paginator->sort('uuid'); ?></th>
 			<th><?php echo $this->Paginator->sort('title'); ?></th>
 			<th><?php echo $this->Paginator->sort('description'); ?></th>
-			<th><?php echo $this->Paginator->sort('solicitor'); ?></th>
+			<th><?php echo $this->Paginator->sort('requestor'); ?></th>
 			<th><?php echo $this->Paginator->sort('closed'); ?></th>
 			<th><?php echo $this->Paginator->sort('created'); ?></th>
 			<th><?php echo $this->Paginator->sort('modified'); ?></th>
@@ -18,7 +18,7 @@
 		<td><?php echo h($incident['Incident']['uuid']); ?>&nbsp;</td>
 		<td><?php echo h($incident['Incident']['title']); ?>&nbsp;</td>
 		<td><?php echo h($incident['Incident']['description']); ?>&nbsp;</td>
-		<td><?php echo h($incident['Incident']['solicitor']); ?>&nbsp;</td>
+		<td><?php echo h($incident['Incident']['requestor']); ?>&nbsp;</td>
 		<td><?php echo h($incident['Incident']['closed']); ?>&nbsp;</td>
 		<td><?php echo h($incident['Incident']['created']); ?>&nbsp;</td>
 		<td><?php echo h($incident['Incident']['modified']); ?>&nbsp;</td>
@@ -30,18 +30,11 @@
 	</tr>
 <?php endforeach; ?>
 	</table>
-	<p>
-	<?php
-	echo $this->Paginator->counter(array(
-	'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
-	));
-	?>	</p>
+
 	<div class="paging">
-	<?php
-		echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
-		echo $this->Paginator->numbers(array('separator' => ''));
-		echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
-	?>
+		<?php echo $this->Paginator->pagination(array(
+			'ul' => 'pagination'
+		)); ?>
 	</div>
 </div>
 <div class="actions">

@@ -50,7 +50,7 @@
 		<th><?php echo __('Uuid'); ?></th>
 		<th><?php echo __('Title'); ?></th>
 		<th><?php echo __('Description'); ?></th>
-		<th><?php echo __('Priority Id'); ?></th>
+		<th><?php echo __('Requestor'); ?></th>
 		<th><?php echo __('Closed'); ?></th>
 		<th><?php echo __('Created'); ?></th>
 		<th><?php echo __('Modified'); ?></th>
@@ -62,7 +62,7 @@
 			<td><?php echo $incident['uuid']; ?></td>
 			<td><?php echo $incident['title']; ?></td>
 			<td><?php echo $incident['description']; ?></td>
-			<td><?php echo $incident['priority_id']; ?></td>
+			<td><?php echo $incident['requestor']; ?></td>
 			<td><?php echo $incident['closed']; ?></td>
 			<td><?php echo $incident['created']; ?></td>
 			<td><?php echo $incident['modified']; ?></td>

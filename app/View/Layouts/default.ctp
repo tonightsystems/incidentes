@@ -7,7 +7,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<link rel="shortcut icon" href="../../assets/ico/favicon.ico">
-	<title>Dashboard Template for Bootstrap</title>
+	<title><?php echo $title_for_layout; ?></title>
 	<?php
 		echo $this->Html->css([
 			'bootstrap.min',
@@ -29,14 +29,11 @@
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">Dashboard</a></li>
+					<li><?php echo $this->Html->link(__('New Incident'), array('action' => 'add')); ?></li>
 					<li><a href="#">Settings</a></li>
 					<li><a href="#">Profile</a></li>
 					<li><a href="#">Help</a></li>
 				</ul>
-				<form class="navbar-form navbar-right">
-					<input type="text" class="form-control" placeholder="Search...">
-				</form>
 			</div>
 		</div>
 	</div>

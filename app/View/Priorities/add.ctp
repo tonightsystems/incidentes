@@ -5,6 +5,7 @@
 	<?php
 		echo $this->Form->input('name');
 		echo $this->Form->input('ola_time');
+		echo $this->Form->input('Incident');
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>
