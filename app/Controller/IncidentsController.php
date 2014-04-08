@@ -52,7 +52,6 @@ class IncidentsController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Incident->create();
-			$this->request->data['Incident']['uuid'] = String::uuid();
 			if ($this->Incident->save($this->request->data)) {
 				$this->Session->setFlash(__('The incident has been saved.'), 'alert', array(
 					'plugin' => 'BoostCake',

@@ -25,7 +25,7 @@ class Incident extends AppModel {
 			'uuid' => array(
 				'rule' => array('uuid'),
 				// 'message' => 'Your custom message here',
-				//'allowEmpty' => false,
+				'allowEmpty' => true,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
@@ -61,7 +61,7 @@ class Incident extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'closed' => array(
+		'status' => array(
 			'boolean' => array(
 				'rule' => array('boolean'),
 				//'message' => 'Your custom message here',
@@ -108,5 +108,13 @@ class Incident extends AppModel {
 			'finderQuery' => '',
 		)
 	);
+
+	public function beforeSave($options = array()) {
+		if (empty($this->data['Incident']['uuid'])) {
+			$this->data['Incident']['uuid'] = String::uuid();
+		}
+
+		return true;
+	}
 
 }
