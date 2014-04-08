@@ -3,10 +3,17 @@ App::uses('AppModel', 'Model');
 /**
  * Incident Model
  *
- * @property Priority $Priority
  * @property Person $Person
+ * @property Priority $Priority
  */
 class Incident extends AppModel {
+
+/**
+ * Display field
+ *
+ * @var string
+ */
+	public $displayField = 'title';
 
 /**
  * Validation rules
@@ -17,7 +24,7 @@ class Incident extends AppModel {
 		'uuid' => array(
 			'uuid' => array(
 				'rule' => array('uuid'),
-				//'message' => 'Your custom message here',
+				// 'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
@@ -44,9 +51,19 @@ class Incident extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
+		'requestor' => array(
+			'notEmpty' => array(
+				'rule' => array('notEmpty'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
 		'closed' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
+			'boolean' => array(
+				'rule' => array('boolean'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -59,21 +76,6 @@ class Incident extends AppModel {
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**
- * belongsTo associations
- *
- * @var array
- */
-	public $belongsTo = array(
-		'Priority' => array(
-			'className' => 'Priority',
-			'foreignKey' => 'priority_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		)
-	);
-
-/**
  * hasAndBelongsToMany associations
  *
  * @var array
@@ -84,6 +86,19 @@ class Incident extends AppModel {
 			'joinTable' => 'incidents_people',
 			'foreignKey' => 'incident_id',
 			'associationForeignKey' => 'person_id',
+			'unique' => 'keepExisting',
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'finderQuery' => '',
+		),
+		'Priority' => array(
+			'className' => 'Priority',
+			'joinTable' => 'incidents_priorities',
+			'foreignKey' => 'incident_id',
+			'associationForeignKey' => 'priority_id',
 			'unique' => 'keepExisting',
 			'conditions' => '',
 			'fields' => '',
