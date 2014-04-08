@@ -49,10 +49,16 @@ class GroupsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Group->create();
 			if ($this->Group->save($this->request->data)) {
-				$this->Session->setFlash(__('The group has been saved.'));
+				$this->Session->setFlash(__('The group has been saved.'), 'alert', array(
+					'plugin' => 'BoostCake',
+					'class' => 'alert-success'
+				));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The group could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The group could not be saved. Please, try again.'), 'alert', array(
+					'plugin' => 'BoostCake',
+					'class' => 'alert-danger'
+				));
 			}
 		}
 	}
@@ -70,10 +76,16 @@ class GroupsController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Group->save($this->request->data)) {
-				$this->Session->setFlash(__('The group has been saved.'));
+				$this->Session->setFlash(__('The group has been saved.'), 'alert', array(
+					'plugin' => 'BoostCake',
+					'class' => 'alert-success'
+				));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The group could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The group could not be saved. Please, try again.'), 'alert', array(
+					'plugin' => 'BoostCake',
+					'class' => 'alert-danger'
+				));
 			}
 		} else {
 			$options = array('conditions' => array('Group.' . $this->Group->primaryKey => $id));
@@ -95,9 +107,15 @@ class GroupsController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Group->delete()) {
-			$this->Session->setFlash(__('The group has been deleted.'));
+			$this->Session->setFlash(__('The group has been deleted.'), 'alert', array(
+				'plugin' => 'BoostCake',
+				'class' => 'alert-success'
+			));
 		} else {
-			$this->Session->setFlash(__('The group could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('The group could not be deleted. Please, try again.'), 'alert', array(
+				'plugin' => 'BoostCake',
+				'class' => 'alert-danger'
+			));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}}
