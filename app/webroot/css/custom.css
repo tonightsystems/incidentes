@@ -94,3 +94,18 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+.left {
+	float: left;
+}
+.right {
+	float: right;
+}
+
+.index h2 {
+	display: inline-block;
+	margin-right: 15px;
+}
+.index h2 + .btn {
+	margin-top: -10px;
+}
