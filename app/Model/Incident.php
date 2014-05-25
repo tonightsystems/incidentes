@@ -3,8 +3,8 @@ App::uses('AppModel', 'Model');
 /**
  * Incident Model
  *
- * @property Person $Person
- * @property Priority $Priority
+ * @property IncidentPriority $IncidentPriority
+ * @property IncidentPerson $IncidentPerson
  */
 class Incident extends AppModel {
 
@@ -24,8 +24,8 @@ class Incident extends AppModel {
 		'uuid' => array(
 			'uuid' => array(
 				'rule' => array('uuid'),
-				// 'message' => 'Your custom message here',
-				'allowEmpty' => true,
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
@@ -76,39 +76,44 @@ class Incident extends AppModel {
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**
- * hasAndBelongsToMany associations
+ * hasMany associations
  *
  * @var array
  */
-	public $hasAndBelongsToMany = array(
-		'Person' => array(
-			'className' => 'Person',
-			'joinTable' => 'incidents_people',
+	public $hasMany = array(
+		'IncidentPriority' => array(
+			'className' => 'IncidentPriority',
 			'foreignKey' => 'incident_id',
-			'associationForeignKey' => 'person_id',
-			'unique' => 'keepExisting',
+			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
 			'limit' => '',
 			'offset' => '',
+			'exclusive' => '',
 			'finderQuery' => '',
+			'counterQuery' => ''
 		),
-		'Priority' => array(
-			'className' => 'Priority',
-			'joinTable' => 'incidents_priorities',
+		'IncidentPerson' => array(
+			'className' => 'IncidentPerson',
 			'foreignKey' => 'incident_id',
-			'associationForeignKey' => 'priority_id',
-			'unique' => 'keepExisting',
+			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
 			'limit' => '',
 			'offset' => '',
+			'exclusive' => '',
 			'finderQuery' => '',
+			'counterQuery' => ''
 		)
 	);
 
+/**
+ * beforeSave
+ * @param  array  $options [description]
+ * @return boolean
+ */
 	public function beforeSave($options = array()) {
 		if (empty($this->data['Incident']['uuid'])) {
 			$this->data['Incident']['uuid'] = String::uuid();

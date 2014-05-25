@@ -44,24 +44,24 @@ class Person extends AppModel {
 	);
 
 /**
- * hasAndBelongsToMany associations
+ * hasMany associations
  *
  * @var array
  */
-	public $hasAndBelongsToMany = array(
-		'Incident' => array(
-			'className' => 'Incident',
-			'joinTable' => 'incidents_people',
+	public $hasMany = array(
+		'IncidentPerson' => array(
+			'className' => 'IncidentPerson',
 			'foreignKey' => 'person_id',
-			'associationForeignKey' => 'incident_id',
-			'unique' => 'keepExisting',
+			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
 			'limit' => '',
 			'offset' => '',
+			'exclusive' => '',
 			'finderQuery' => '',
-		)
+			'counterQuery' => ''
+		),
 	);
 
 }

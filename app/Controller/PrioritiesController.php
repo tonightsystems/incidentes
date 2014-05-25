@@ -50,20 +50,12 @@ class PrioritiesController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Priority->create();
 			if ($this->Priority->save($this->request->data)) {
-				$this->Session->setFlash(__('The priority has been saved.'), 'alert', array(
-					'plugin' => 'BoostCake',
-					'class' => 'alert-success'
-				));
+				$this->Session->setFlash(__('The priority has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The priority could not be saved. Please, try again.'), 'alert', array(
-					'plugin' => 'BoostCake',
-					'class' => 'alert-danger'
-				));
+				$this->Session->setFlash(__('The priority could not be saved. Please, try again.'));
 			}
 		}
-		$incidents = $this->Priority->Incident->find('list');
-		$this->set(compact('incidents'));
 	}
 
 /**
@@ -79,23 +71,15 @@ class PrioritiesController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Priority->save($this->request->data)) {
-				$this->Session->setFlash(__('The priority has been saved.'), 'alert', array(
-					'plugin' => 'BoostCake',
-					'class' => 'alert-success'
-				));
+				$this->Session->setFlash(__('The priority has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The priority could not be saved. Please, try again.'), 'alert', array(
-					'plugin' => 'BoostCake',
-					'class' => 'alert-success'
-				));
+				$this->Session->setFlash(__('The priority could not be saved. Please, try again.'));
 			}
 		} else {
 			$options = array('conditions' => array('Priority.' . $this->Priority->primaryKey => $id));
 			$this->request->data = $this->Priority->find('first', $options);
 		}
-		$incidents = $this->Priority->Incident->find('list');
-		$this->set(compact('incidents'));
 	}
 
 /**
@@ -112,15 +96,9 @@ class PrioritiesController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Priority->delete()) {
-			$this->Session->setFlash(__('The priority has been deleted.'), 'alert', array(
-				'plugin' => 'BoostCake',
-				'class' => 'alert-success'
-			));
+			$this->Session->setFlash(__('The priority has been deleted.'));
 		} else {
-			$this->Session->setFlash(__('The priority could not be deleted. Please, try again.'), 'alert', array(
-				'plugin' => 'BoostCake',
-				'class' => 'alert-danger'
-			));
+			$this->Session->setFlash(__('The priority could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}}

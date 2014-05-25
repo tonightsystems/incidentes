@@ -13,7 +13,14 @@ class IncidentsController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator');
+	public $components = array('Paginator', 'Session');
+
+/**
+ * Models
+ *
+ * @var array
+ */
+	public $uses = array('Incident', 'Person', 'Priority', 'IncidentPerson', 'IncidentPriority');
 
 /**
  * index method
@@ -21,8 +28,8 @@ class IncidentsController extends AppController {
  * @return void
  */
 	public function index() {
-		$this->Incident->recursive = 0;
-		$this->Incident->order = 'Incident.created DESC';
+		$this->Incident->recursive = 2;
+		$this->Incident->order = 'Incident.created DESC, Incident.status DESC';
 		$this->set('incidents', $this->Paginator->paginate());
 	}
 
@@ -37,7 +44,7 @@ class IncidentsController extends AppController {
 		if (!$this->Incident->exists($id)) {
 			throw new NotFoundException(__('Invalid incident'));
 		}
-		$this->Incident->recursive = 1;
+		$this->Incident->recursive = 2;
 		$options = array(
 			'conditions' => array('Incident.' . $this->Incident->primaryKey => $id)
 		);
@@ -53,6 +60,19 @@ class IncidentsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Incident->create();
 			if ($this->Incident->save($this->request->data)) {
+
+				$this->IncidentPerson->create();
+				$this->IncidentPerson->save(array(
+					'incident_id' => $this->Incident->id,
+					'person_id' => $this->request->data['Incident']['Person'],
+				));
+
+				$this->IncidentPriority->create();
+				$this->IncidentPriority->save(array(
+					'incident_id' => $this->Incident->id,
+					'priority_id' => $this->request->data['Incident']['Priority'],
+				));
+
 				$this->Session->setFlash(__('The incident has been saved.'), 'alert', array(
 					'plugin' => 'BoostCake',
 					'class' => 'alert-success'
@@ -65,8 +85,8 @@ class IncidentsController extends AppController {
 				));
 			}
 		}
-		$priorities = $this->Incident->Priority->find('list');
-		$people = $this->Incident->Person->find('list');
+		$priorities = $this->Priority->find('list');
+		$people = $this->Person->find('list');
 		$this->set(compact('priorities', 'people'));
 	}
 
@@ -83,6 +103,19 @@ class IncidentsController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Incident->save($this->request->data)) {
+
+				$this->IncidentPerson->create();
+				$this->IncidentPerson->save(array(
+					'incident_id' => $this->Incident->id,
+					'person_id' => $this->request->data['Incident']['Person'],
+				));
+
+				$this->IncidentPriority->create();
+				$this->IncidentPriority->save(array(
+					'incident_id' => $this->Incident->id,
+					'priority_id' => $this->request->data['Incident']['Priority'],
+				));
+
 				$this->Session->setFlash(__('The incident has been saved.'), 'alert', array(
 					'plugin' => 'BoostCake',
 					'class' => 'alert-success'
@@ -98,8 +131,8 @@ class IncidentsController extends AppController {
 			$options = array('conditions' => array('Incident.' . $this->Incident->primaryKey => $id));
 			$this->request->data = $this->Incident->find('first', $options);
 		}
-		$priorities = $this->Incident->Priority->find('list');
-		$people = $this->Incident->Person->find('list');
+		$priorities = $this->Priority->find('list');
+		$people = $this->Person->find('list');
 		$this->set(compact('priorities', 'people'));
 	}
 

@@ -35,24 +35,24 @@ class Priority extends AppModel {
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**
- * hasAndBelongsToMany associations
+ * hasMany associations
  *
  * @var array
  */
-	public $hasAndBelongsToMany = array(
-		'Incident' => array(
-			'className' => 'Incident',
-			'joinTable' => 'incidents_priorities',
+	public $hasMany = array(
+		'IncidentPriorities' => array(
+			'className' => 'IncidentPriorities',
 			'foreignKey' => 'priority_id',
-			'associationForeignKey' => 'incident_id',
-			'unique' => 'keepExisting',
+			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
 			'limit' => '',
 			'offset' => '',
+			'exclusive' => '',
 			'finderQuery' => '',
-		)
+			'counterQuery' => ''
+		),
 	);
 
 }

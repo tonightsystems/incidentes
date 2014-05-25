@@ -18,55 +18,33 @@
 		</dd>
 	</dl>
 </div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Priority'), array('action' => 'edit', $priority['Priority']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Priority'), array('action' => 'delete', $priority['Priority']['id']), null, __('Are you sure you want to delete # %s?', $priority['Priority']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Priorities'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Priority'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Incidents'), array('controller' => 'incidents', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Incident'), array('controller' => 'incidents', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
+
+<?php if (!empty($priority['Incident'])): ?>
 <div class="related">
 	<h3><?php echo __('Related Incidents'); ?></h3>
-	<?php if (!empty($priority['Incident'])): ?>
-	<table cellpadding = "0" cellspacing = "0">
-	<tr>
-		<th><?php echo __('Id'); ?></th>
-		<th><?php echo __('Uuid'); ?></th>
-		<th><?php echo __('Title'); ?></th>
-		<th><?php echo __('Description'); ?></th>
-		<th><?php echo __('Solicitor'); ?></th>
-		<th><?php echo __('Closed'); ?></th>
-		<th><?php echo __('Created'); ?></th>
-		<th><?php echo __('Modified'); ?></th>
-		<th class="actions"><?php echo __('Actions'); ?></th>
-	</tr>
-	<?php foreach ($priority['Incident'] as $incident): ?>
-		<tr>
-			<td><?php echo $incident['id']; ?></td>
-			<td><?php echo $incident['uuid']; ?></td>
-			<td><?php echo $incident['title']; ?></td>
-			<td><?php echo $incident['description']; ?></td>
-			<td><?php echo $incident['solicitor']; ?></td>
-			<td><?php echo $incident['closed']; ?></td>
-			<td><?php echo $incident['created']; ?></td>
-			<td><?php echo $incident['modified']; ?></td>
-			<td class="actions">
-				<?php echo $this->Html->link(__('View'), array('controller' => 'incidents', 'action' => 'view', $incident['id'])); ?>
-				<?php echo $this->Html->link(__('Edit'), array('controller' => 'incidents', 'action' => 'edit', $incident['id'])); ?>
-				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'incidents', 'action' => 'delete', $incident['id']), null, __('Are you sure you want to delete # %s?', $incident['id'])); ?>
-			</td>
-		</tr>
-	<?php endforeach; ?>
-	</table>
-<?php endif; ?>
-
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Incident'), array('controller' => 'incidents', 'action' => 'add')); ?> </li>
-		</ul>
+	<div class="table-responsive">
+		<table cellpadding="0" cellspacing="0" class="table table-striped">
+			<thead>
+				<tr>
+					<th width="2%"><input type="checkbox" name="" id=""></th>
+					<th><?php echo __('Title'); ?></th>
+					<th width="10%"><?php echo __('Priority'); ?></th>
+					<th width="10%"><?php echo __('Status'); ?></th>
+					<th width="13%"><?php echo __('Created'); ?></th>
+				</tr>
+			</thead>
+			<?php foreach ($priority['Incident'] as $incident): ?>
+			<tr>
+				<td><input type="checkbox" name="" id=""></td>
+				<td>
+					<?php echo $this->Html->link($incident['Incident']['title'], array('action' => 'view', $incident['Incident']['id'])); ?> <br>
+					<small><em><?php echo $this->Text->truncate($incident['Incident']['description'], 100) ?>&nbsp;</em></small></td>
+				<td><?php echo h($incident['IncidentsPriority'][0]['name']) ?>&nbsp;</td>
+				<td><?php echo ($incident['Incident']['status']) ? __('Closed') : __('Open'); ?>&nbsp;</td>
+				<td><?php echo $this->Time->format($incident['Incident']['created'], '%e de %B de %Y <br> as %H:%M %p'); ?>&nbsp;</td>
+			</tr>
+			<?php endforeach; ?>
+		</table>
 	</div>
 </div>
+<?php endif; ?>

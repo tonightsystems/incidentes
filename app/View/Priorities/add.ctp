@@ -1,21 +1,25 @@
 <div class="priorities form">
-<?php echo $this->Form->create('Priority'); ?>
+	<?php
+		echo $this->Form->create('Priority', array(
+			'inputDefaults' => array(
+				'div' => 'form-group',
+				'wrapInput' => false,
+				'class' => 'form-control'
+			),
+			'novalidate'
+		));
+	?>
 	<fieldset>
 		<legend><?php echo __('Add Priority'); ?></legend>
 	<?php
 		echo $this->Form->input('name');
 		echo $this->Form->input('ola_time');
-		echo $this->Form->input('Incident');
 	?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-
-		<li><?php echo $this->Html->link(__('List Priorities'), array('action' => 'index')); ?></li>
-		<li><?php echo $this->Html->link(__('List Incidents'), array('controller' => 'incidents', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Incident'), array('controller' => 'incidents', 'action' => 'add')); ?> </li>
-	</ul>
+	<?php
+		echo $this->Form->submit(__('Submit'), array(
+			'class' => 'btn btn-primary'
+		));
+		echo $this->Form->end();
+	?>
 </div>

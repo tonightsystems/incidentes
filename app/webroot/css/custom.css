@@ -102,10 +102,14 @@ body {
 	float: right;
 }
 
-.index h2 {
+h2 {
 	display: inline-block;
 	margin-right: 15px;
 }
-.index h2 + .btn {
+h2 + .btn {
 	margin-top: -10px;
+}
+dd {
+	padding-left: 30px;
+	margin: 10px 0;
 }

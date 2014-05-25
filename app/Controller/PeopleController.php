@@ -5,6 +5,7 @@ App::uses('AppController', 'Controller');
  *
  * @property Person $Person
  * @property PaginatorComponent $Paginator
+ * @property SessionComponent $Session
  */
 class PeopleController extends AppController {
 
@@ -13,7 +14,7 @@ class PeopleController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator');
+	public $components = array('Paginator', 'Session');
 
 /**
  * index method
@@ -22,6 +23,7 @@ class PeopleController extends AppController {
  */
 	public function index() {
 		$this->Person->recursive = 0;
+		$this->Person->order = 'Person.name ASC';
 		$this->set('people', $this->Paginator->paginate());
 	}
 
@@ -49,21 +51,14 @@ class PeopleController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Person->create();
 			if ($this->Person->save($this->request->data)) {
-				$this->Session->setFlash(__('The person has been saved.'), 'alert', array(
-					'plugin' => 'BoostCake',
-					'class' => 'alert-success'
-				));
+				$this->Session->setFlash(__('The person has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The person could not be saved. Please, try again.'), 'alert', array(
-					'plugin' => 'BoostCake',
-					'class' => 'alert-danger'
-				));
+				$this->Session->setFlash(__('The person could not be saved. Please, try again.'));
 			}
 		}
 		$groups = $this->Person->Group->find('list');
-		$incidents = $this->Person->Incident->find('list');
-		$this->set(compact('groups', 'incidents'));
+		$this->set(compact('groups'));
 	}
 
 /**
@@ -79,24 +74,17 @@ class PeopleController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Person->save($this->request->data)) {
-				$this->Session->setFlash(__('The person has been saved.'), 'alert', array(
-					'plugin' => 'BoostCake',
-					'class' => 'alert-success'
-				));
+				$this->Session->setFlash(__('The person has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The person could not be saved. Please, try again.'), 'alert', array(
-					'plugin' => 'BoostCake',
-					'class' => 'alert-danger'
-				));
+				$this->Session->setFlash(__('The person could not be saved. Please, try again.'));
 			}
 		} else {
 			$options = array('conditions' => array('Person.' . $this->Person->primaryKey => $id));
 			$this->request->data = $this->Person->find('first', $options);
 		}
 		$groups = $this->Person->Group->find('list');
-		$incidents = $this->Person->Incident->find('list');
-		$this->set(compact('groups', 'incidents'));
+		$this->set(compact('groups'));
 	}
 
 /**
@@ -113,15 +101,9 @@ class PeopleController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Person->delete()) {
-			$this->Session->setFlash(__('The person has been deleted.'), 'alert', array(
-				'plugin' => 'BoostCake',
-				'class' => 'alert-success'
-			));
+			$this->Session->setFlash(__('The person has been deleted.'));
 		} else {
-			$this->Session->setFlash(__('The person could not be deleted. Please, try again.'), 'alert', array(
-				'plugin' => 'BoostCake',
-				'class' => 'alert-danger'
-			));
+			$this->Session->setFlash(__('The person could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}}

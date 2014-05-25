@@ -23,49 +23,29 @@
 		</dd>
 	</dl>
 </div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Group'), array('action' => 'edit', $group['Group']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Group'), array('action' => 'delete', $group['Group']['id']), null, __('Are you sure you want to delete # %s?', $group['Group']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Groups'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Group'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List People'), array('controller' => 'people', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Person'), array('controller' => 'people', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
+
+<?php if (!empty($group['Person'])): ?>
 <div class="related">
 	<h3><?php echo __('Related People'); ?></h3>
-	<?php if (!empty($group['Person'])): ?>
-	<table cellpadding = "0" cellspacing = "0">
-	<tr>
-		<th><?php echo __('Id'); ?></th>
-		<th><?php echo __('Name'); ?></th>
-		<th><?php echo __('Group Id'); ?></th>
-		<th><?php echo __('Created'); ?></th>
-		<th><?php echo __('Modified'); ?></th>
-		<th class="actions"><?php echo __('Actions'); ?></th>
-	</tr>
-	<?php foreach ($group['Person'] as $person): ?>
-		<tr>
-			<td><?php echo $person['id']; ?></td>
-			<td><?php echo $person['name']; ?></td>
-			<td><?php echo $person['group_id']; ?></td>
-			<td><?php echo $person['created']; ?></td>
-			<td><?php echo $person['modified']; ?></td>
-			<td class="actions">
-				<?php echo $this->Html->link(__('View'), array('controller' => 'people', 'action' => 'view', $person['id'])); ?>
-				<?php echo $this->Html->link(__('Edit'), array('controller' => 'people', 'action' => 'edit', $person['id'])); ?>
-				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'people', 'action' => 'delete', $person['id']), null, __('Are you sure you want to delete # %s?', $person['id'])); ?>
-			</td>
-		</tr>
-	<?php endforeach; ?>
-	</table>
-<?php endif; ?>
-
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Person'), array('controller' => 'people', 'action' => 'add')); ?> </li>
-		</ul>
+	<div class="table-responsive">
+		<table cellpadding="0" cellspacing="0" class="table table-striped table-condensed">
+			<thead>
+				<tr>
+					<th><?php echo __('Name'); ?></th>
+					<th width="13%" class="actions"><?php echo __('Actions'); ?></th>
+				</tr>
+			</thead>
+			<?php foreach ($group['Person'] as $person): ?>
+				<tr>
+					<td><?php echo $this->Html->link($person['name'], array('controller' => 'people', 'action' => 'view', $person['id'])); ?></td>
+					<td class="actions">
+						<?php echo $this->Html->link(__('View'), array('controller' => 'people', 'action' => 'view', $person['id']), array('class' => 'btn btn-xs btn-default')); ?>
+						<?php echo $this->Html->link(__('Edit'), array('controller' => 'people', 'action' => 'edit', $person['id']), array('class' => 'btn btn-xs btn-default')); ?>
+						<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'people', 'action' => 'delete', $person['id']), array('class' => 'btn btn-xs btn-danger'), __('Are you sure you want to delete # %s?', $person['id'])); ?>
+					</td>
+				</tr>
+			<?php endforeach; ?>
+		</table>
 	</div>
 </div>
+<?php endif; ?>
