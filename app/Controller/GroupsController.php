@@ -59,19 +59,8 @@ class GroupsController extends AppController {
 				)
 			)
 		));
-		// pr($incidents); die();
-		$this->set(compact('group', 'incidents'));
 
-		// $serialized = array();
-		// foreach ($group['Person'] as $person) {
-		// 	if (!empty($person['IncidentPerson'])) {
-		// 		foreach ($person['IncidentPerson'] as $incident) {
-		// 			$serialized[] = $incident['Incident'];
-		// 		}
-		// 	}
-		// }
-		// // pr($serialized); die();
-		// $this->set('_serialize', $serialized);
+		$this->set(compact('group', 'incidents'));
 	}
 
 /**

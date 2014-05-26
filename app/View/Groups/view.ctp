@@ -53,7 +53,7 @@
 <?php if (!empty($group['Person'])): ?>
 <div class="related">
 	<h4><?php echo __('Related Incidents'); ?></h4>
-	<a href="<?php echo $this->Html->url('/groups/view/'. $group['Group']['id'] .'.json'); ?>" class="btn btn-default btn-sm"><?php echo __('Export All Incidents'); ?></a>
+	<?php echo $this->Html->link(__('Export All Incidents'), array('action' => 'view', $group['Group']['id'], 'ext' => 'json'), array('class' => 'btn btn-default btn-sm')); ?>
 	<div class="table-responsive">
 		<table cellpadding="0" cellspacing="0" class="table table-striped table-condensed">
 			<thead>
