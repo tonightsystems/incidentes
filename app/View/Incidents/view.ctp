@@ -1,12 +1,8 @@
 <div class="incidents view">
 	<h2><?php echo __('Incident'); ?></h2>
 	<?php echo $this->Html->link(__('Edit Incident'), array('action' => 'edit', $incident['Incident']['id']), array('class' => 'btn btn-primary btn-sm')); ?>
+	<a href="<?php echo $this->Html->url("/incidents/view/{$incident['Incident']['id']}.json"); ?>" class="btn btn-default btn-sm"><?php echo __('Export Incident'); ?></a>
 	<dl>
-		<dt><?php echo __('Id'); ?></dt>
-		<dd>
-			<?php echo h($incident['Incident']['id']); ?>
-			&nbsp;
-		</dd>
 		<dt><?php echo __('Uuid'); ?></dt>
 		<dd>
 			<?php echo h($incident['Incident']['uuid']); ?>
@@ -29,7 +25,7 @@
 		</dd>
 		<dt><?php echo __('Status'); ?></dt>
 		<dd>
-			<?php echo h($incident['Incident']['status']); ?>
+			<?php echo ($incident['Incident']['status']) ? __('Closed') : __('Open'); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Created'); ?></dt>

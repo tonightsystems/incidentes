@@ -13,7 +13,7 @@ class IncidentsController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator', 'Session');
+	public $components = array('Paginator', 'Session', 'RequestHandler');
 
 /**
  * Models
@@ -48,7 +48,8 @@ class IncidentsController extends AppController {
 		$options = array(
 			'conditions' => array('Incident.' . $this->Incident->primaryKey => $id)
 		);
-		$this->set('incident', $this->Incident->find('first', $options));
+		$incident = $this->Incident->find('first', $options);
+		$this->set('incident', $incident);
 	}
 
 /**

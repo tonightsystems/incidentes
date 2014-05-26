@@ -13,7 +13,14 @@ class GroupsController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator');
+	public $components = array('Paginator', 'RequestHandler');
+
+/**
+ * Models used
+ *
+ * @var array
+ */
+	public $uses = array('Group', 'Incident');
 
 /**
  * index method
@@ -37,8 +44,34 @@ class GroupsController extends AppController {
 		if (!$this->Group->exists($id)) {
 			throw new NotFoundException(__('Invalid group'));
 		}
+		$this->Group->recursive = 1;
+		$this->Incident->recursive = 0;
 		$options = array('conditions' => array('Group.' . $this->Group->primaryKey => $id));
-		$this->set('group', $this->Group->find('first', $options));
+		$group = $this->Group->find('first', $options);
+		$incidents = $this->Incident->find('all', array(
+			'contain' => array(
+				'IncidentPerson' => array(
+					'Person' => array(
+						'conditions' => array(
+							'Person.group_id' => $id
+						)
+					)
+				)
+			)
+		));
+		// pr($incidents); die();
+		$this->set(compact('group', 'incidents'));
+
+		// $serialized = array();
+		// foreach ($group['Person'] as $person) {
+		// 	if (!empty($person['IncidentPerson'])) {
+		// 		foreach ($person['IncidentPerson'] as $incident) {
+		// 			$serialized[] = $incident['Incident'];
+		// 		}
+		// 	}
+		// }
+		// // pr($serialized); die();
+		// $this->set('_serialize', $serialized);
 	}
 
 /**

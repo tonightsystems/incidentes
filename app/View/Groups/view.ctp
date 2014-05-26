@@ -26,7 +26,7 @@
 
 <?php if (!empty($group['Person'])): ?>
 <div class="related">
-	<h3><?php echo __('Related People'); ?></h3>
+	<h4><?php echo __('Related People'); ?></h4>
 	<div class="table-responsive">
 		<table cellpadding="0" cellspacing="0" class="table table-striped table-condensed">
 			<thead>
@@ -43,6 +43,29 @@
 						<?php echo $this->Html->link(__('Edit'), array('controller' => 'people', 'action' => 'edit', $person['id']), array('class' => 'btn btn-xs btn-default')); ?>
 						<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'people', 'action' => 'delete', $person['id']), array('class' => 'btn btn-xs btn-danger'), __('Are you sure you want to delete # %s?', $person['id'])); ?>
 					</td>
+				</tr>
+			<?php endforeach; ?>
+		</table>
+	</div>
+</div>
+<?php endif; ?>
+
+<?php if (!empty($group['Person'])): ?>
+<div class="related">
+	<h4><?php echo __('Related Incidents'); ?></h4>
+	<a href="<?php echo $this->Html->url('/groups/view/'. $group['Group']['id'] .'.json'); ?>" class="btn btn-default btn-sm"><?php echo __('Export All Incidents'); ?></a>
+	<div class="table-responsive">
+		<table cellpadding="0" cellspacing="0" class="table table-striped table-condensed">
+			<thead>
+				<tr>
+					<th><?php echo __('Incident'); ?></th>
+					<th width="13%"><?php echo __('Status'); ?></th>
+				</tr>
+			</thead>
+			<?php foreach ($incidents as $incident): ?>
+				<tr>
+					<td><?php echo $this->Html->link($incident['Incident']['title'], array('controller' => 'incidents', 'action' => 'view', $incident['Incident']['id'])); ?></td>
+					<td><?php echo ($incident['Incident']['status']) ? __('Closed') : __('Open'); ?>&nbsp;</td>
 				</tr>
 			<?php endforeach; ?>
 		</table>

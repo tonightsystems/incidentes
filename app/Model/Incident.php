@@ -16,6 +16,13 @@ class Incident extends AppModel {
 	public $displayField = 'title';
 
 /**
+ * Behaviors
+ *
+ * @var array
+ */
+	public $actsAs = array('Containable');
+
+/**
  * Validation rules
  *
  * @var array

@@ -25,6 +25,8 @@
  * to use (in this case, /app/View/Pages/home.ctp)...
  */
 	Router::connect('/', array('controller' => 'incidents', 'action' => 'index'));
+
+	Router::parseExtensions('json', 'xml');
 /**
  * ...and connect the rest of 'Pages' controller's URLs.
  */

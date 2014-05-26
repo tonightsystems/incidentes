@@ -5,7 +5,7 @@
 		<table cellpadding="0" cellspacing="0" class="table table-striped">
 			<thead>
 				<tr>
-					<th width="2%"><input type="checkbox" name="" id=""></th>
+					<!-- <th width="2%"><input type="checkbox" name="" id=""></th> -->
 					<th><?php echo $this->Paginator->sort('title'); ?></th>
 					<th width="10%"><?php echo $this->Paginator->sort('Priority'); ?></th>
 					<th width="10%"><?php echo $this->Paginator->sort('status'); ?></th>
@@ -14,7 +14,7 @@
 			</thead>
 			<?php foreach ($incidents as $incident): ?>
 			<tr>
-				<td><input type="checkbox" name="" id=""></td>
+				<!-- <td><input type="checkbox" name="" id=""></td> -->
 				<td>
 					<?php echo $this->Html->link($incident['Incident']['title'], array('action' => 'view', $incident['Incident']['id'])); ?> <br>
 					<small><em><?php echo $this->Text->truncate($incident['Incident']['description'], 100) ?>&nbsp;</em></small></td>
