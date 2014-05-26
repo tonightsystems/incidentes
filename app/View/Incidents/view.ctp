@@ -1,7 +1,8 @@
 <div class="incidents view">
 	<h2><?php echo __('Incident'); ?></h2>
 	<?php echo $this->Html->link(__('Edit Incident'), array('action' => 'edit', $incident['Incident']['id']), array('class' => 'btn btn-primary btn-sm')); ?>
-	<?php echo $this->Html->link(__('Export Incident'), array('action' => 'view', $incident['Incident']['id'], 'ext' => 'json'), array('class' => 'btn btn-default btn-sm')); ?>
+	<?php echo $this->Html->link(__('Export Incident (JSON)'), array('action' => 'view', $incident['Incident']['id'], 'ext' => 'json'), array('class' => 'btn btn-default btn-sm')); ?>
+	<?php echo $this->Html->link(__('Export Incident (XML)'), array('action' => 'view', $incident['Incident']['id'], 'ext' => 'xml'), array('class' => 'btn btn-default btn-sm')); ?>
 	<dl>
 		<dt><?php echo __('Uuid'); ?></dt>
 		<dd>

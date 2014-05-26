@@ -53,7 +53,8 @@
 <?php if (!empty($group['Person'])): ?>
 <div class="related">
 	<h4><?php echo __('Related Incidents'); ?></h4>
-	<?php echo $this->Html->link(__('Export All Incidents'), array('action' => 'view', $group['Group']['id'], 'ext' => 'json'), array('class' => 'btn btn-default btn-sm')); ?>
+	<?php echo $this->Html->link(__('Export All Incidents (JSON)'), array('action' => 'view', $group['Group']['id'], 'ext' => 'json'), array('class' => 'btn btn-default btn-sm')); ?>
+	<?php echo $this->Html->link(__('Export All Incidents (XML)'), array('action' => 'view', $group['Group']['id'], 'ext' => 'xml'), array('class' => 'btn btn-default btn-sm')); ?>
 	<div class="table-responsive">
 		<table cellpadding="0" cellspacing="0" class="table table-striped table-condensed">
 			<thead>
